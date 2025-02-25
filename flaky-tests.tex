@@ -24,11 +24,13 @@ Testing is a critical part of software development. It ensures that our applicat
 
 We write automated test suites that run all tests at once, and we leverage continuous integration so that on each commit, a build is triggered which runs our test suites. If any single test fails, the build is failed entirely. This cycle creates rapid feedback which catches code issues before production and allows us to iterate on our applications with confidence.
 
-However, in many test suites—especially those that depend on time, concurrency, or asynchronous processing for example—we encounter tests that sometimes pass and sometimes fail even without any changes to the code under test. These tests, known as \emph{flaky tests}, introduce false negatives into the build, and have a compounding effect.
+However, in many test suites—especially those that depend on time, concurrency, or asynchronous processing for example—we encounter tests that sometimes pass and sometimes fail even without any changes to the code under test. These tests, known as \emph{flaky tests}, introduce false negatives into the build and have a compounding effect.
 
 Teams may attempt to improve reliability by designing more complex CI systems which work around the issue by re-running specific steps of the build, or even only those tests which have failed. However, this strategy merely masks the problem and leads to a team which continues to introduce new flaky tests—ultimately leading to longer feedback cycles and reduced confidence in the application. 
 
-Proactively addressing flaky tests as soon as they appear minimizes the compounding negative impact on the development lifecycle and application stability leading to shorter feedback cycles, higher confidence in our applications, and a team that embraces rapid iteration. 
+Furthermore, it is important to note that while most flaky tests are false negatives—erroneously failing even when the code behaves correctly—there are instances where their intermittent behavior actually represents false positives, inadvertently masking a real bug that needs to be addressed. If we do not fix these tests right away, we may be shipping applications which contaion bugs.
+
+Proactively addressing flaky tests as soon as they appear minimizes the compounding negative impact on the development lifecycle and application stability, leading to shorter feedback cycles, higher confidence in our applications, and a team that embraces rapid iteration. 
 
 \section{Analysis}
 
